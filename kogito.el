@@ -1,9 +1,14 @@
 (setq kogito-apps-root "~/Sync/code/rh/trusty/kogito-apps")
 (defun kogito-make-path (p) (concat kogito-apps-root "/" p))
-(defun maven-install (p) (shell-command-to-string (concat "mvn -f " (kogito-make-path p) " clean install -DskipTests")))
+(defun maven-install-string (p) (concat "mvn -f " (kogito-make-path p) "/pom.xml clean install -DskipTests\n"))
 
-(setq my_shell_output (maven-install "persistence-commons/pom.xml"))
-(message my_shell_output)
+(defun maven-install (p)
+  "Start a Maven clean-install in the `shell' buffer."
+  (interactive)
+  (comint-send-string
+   (get-buffer-process (shell))
+   (maven-install-string p)))
 
-(setq my_shell_output (maven-install "explainability/pom.xml"))
-(message my_shell_output)
+(maven-install "persistence-commons")
+(maven-install "explainability")
+
