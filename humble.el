@@ -13,8 +13,6 @@
 
 
 ;;; Code:
-(require 'org)
-(require 'org-element)
 
 (provide 'humble)
 ;;; humble.el ends here
