@@ -4,7 +4,7 @@
 
 ;; Author: Rui Vieira <ruidevieira@googlemail.com>
 ;; Version: 0.1
-;; Package-Requires: (request json (emacs "24"))
+;; Package-Requires: ((emacs "24") (request) (json))
 ;; Keywords: python, projects
 ;; URL: https://github.com/ruivieira/elisp
 
