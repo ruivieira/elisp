@@ -5,6 +5,7 @@
 (setq quarkus--api-url "https://stage.code.quarkus.io/api")
 
 (defun quarkus-create-app ()
+  "Create a quarkus application"
   (interactive)
   (setq group-id (read-string "Group ID: " "org.acme"))
   (setq artifact-id (read-string "Artifact ID: " "getting-started"))
@@ -33,6 +34,7 @@
   )
 
 (defun quarkus-list-extensions ()
+  "Return a list of available Quarkus extensions"
   (interactive)
   (setq extensions (quarkus--get-extensions))
   (string-join (mapcar '(lambda (e)
@@ -42,7 +44,8 @@
           extensions)
                "\n"))
 
-  (defun quarkus-add-extension ()
+(defun quarkus-add-extension ()
+  "Add a Quarkus extension to the current project"
     (interactive)
 
     (setq extensions (quarkus--get-extensions))
@@ -56,3 +59,13 @@
             extensions)
     (quarkus--maven-add-extension (alist-get 'id (gethash (ido-completing-read "Extension to add: " (hash-table-keys ext-table)) ext-table)))
     )
+
+(defun quarkus-build-binary ()
+  "Compile current Quarkus application to native"
+     (interactive)
+     (comint-send-string
+      (get-buffer-process (shell))
+      "./mvnw package -Pnative\n")
+     )
+
+(provide 'quarkus)
