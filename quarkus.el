@@ -1,3 +1,19 @@
+;;; quarkus.el --- Quarkus utilities
+
+;; Copyright (C) 2021 Rui Vieira
+
+;; Author: Rui Vieira <ruidevieira@googlemail.com>
+;; Version: 0.1
+;; Package-Requires: (request json (emacs "24"))
+;; Keywords: python, projects
+;; URL: https://github.com/ruivieira/elisp
+
+;;; Commentary:
+
+;; Package for Quarkus
+
+
+;;; Code:
 (require 'request)
 (require 'json)
 
@@ -69,3 +85,4 @@
      )
 
 (provide 'quarkus)
+;;; quarkus.el ends here
