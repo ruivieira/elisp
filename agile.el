@@ -22,9 +22,10 @@
 
 (defun agile--build-ticket-string (id title)
   (format "#+Title: %1$s-%2$s\n\n\
+  * Link: %3$s\n
 * JIRA Merge %1$s\n\
 ** REVIEW %1$s\n\
-*** JIRA PR %1$s\n" id title)
+*** JIRA PR %1$s\n" id title (concat agile/jira-server "browse/" id))
   )
 
 (defun agile--build-review-string (id title)
