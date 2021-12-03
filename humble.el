@@ -15,4 +15,15 @@
 ;;; Code:
 
 (provide 'humble)
+(require 'f)
+(require 'ox-hugo)
+
+(defun humble-export-all()
+  "Export all pages in the source root to Markdown"
+  (dolist (fil (f-glob "~/Sync/notes/pages/site/*.org"))
+    (with-current-buffer (find-file-noselect fil)
+      (org-hugo-export-wim-to-md)
+      (message (format "Exporting %s" fil))
+      (kill-buffer))))
+
 ;;; humble.el ends here
