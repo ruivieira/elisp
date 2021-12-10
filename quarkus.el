@@ -5,7 +5,7 @@
 ;; Author: Rui Vieira <ruidevieira@googlemail.com>
 ;; Version: 0.1
 ;; Package-Requires: ((emacs "24.4") (emacs "25.1") (emacs "26.1") (request "0.3"))
-;; Keywords: python, projects
+;; Keywords: java, quarkus, projects
 ;; URL: https://github.com/ruivieira/elisp
 
 ;;; Commentary:
@@ -17,8 +17,15 @@
 (require 'request)
 (require 'json)
 
-(setq quarkus-version "2.3.1.Final")
+(setq quarkus-version "2.5.1.Final")
 (setq quarkus--api-url "https://stage.code.quarkus.io/api")
+
+(defun quarkus--maven-create-project-str (group-id artifact-id namespace)
+  (format "mvn io.quarkus.platform:quarkus-maven-plugin:%1$s:create \
+    -DprojectGroupId=%2$s \
+    -DprojectArtifactId=%3$s \
+    -DclassName='%4$s.GreetingResource' \
+    -Dpath='/hello'\n" quarkus-version group-id artifact-id namespace))
 
 (defun quarkus-create-app ()
   "Create a quarkus application"
@@ -27,14 +34,7 @@
   (setq artifact-id (read-string "Artifact ID: " "getting-started"))
   (setq namespace (replace-regexp-in-string "-" "\." (concat group-id "." artifact-id)))
   (cd "~/tmp")
-  (comint-send-string
-   (get-buffer-process (shell))
-   (format "mvn io.quarkus.platform:quarkus-maven-plugin:%1$s:create \
-    -DprojectGroupId=%2$s \
-    -DprojectArtifactId=%3$s \
-    -DclassName='%4$s.GreetingResource' \
-    -Dpath='/hello'\n" quarkus-version group-id artifact-id namespace))
-  )
+  (compile (quarkus--maven-create-project-str group-id artifact-id namespace)))
 
 (defun quarkus--get-extensions ()
   (request-response-data (request (concat quarkus--api-url "/extensions")
