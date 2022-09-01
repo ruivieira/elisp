@@ -13,6 +13,7 @@
 
 
 ;;; Code:
+(provide 'trustyai)
 
 (defun robby-notes-move ()
   "Move the Obsidian notes"
@@ -25,5 +26,4 @@
         :desc "Move notes" "m" #'robby-notes-move
         :desc "Another entry" "s" #'robby-notes-move)))
 
-(provide 'robby)
 ;;; robby.el ends here
