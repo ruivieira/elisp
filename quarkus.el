@@ -17,8 +17,8 @@
 (require 'request)
 (require 'json)
 
-(setq quarkus-version "2.5.1.Final")
-(setq quarkus--api-url "https://stage.code.quarkus.io/api")
+(defvar quarkus-version "2.5.1.Final")
+(defvar quarkus--api-url "https://stage.code.quarkus.io/api")
 
 (defun quarkus--maven-create-project-str (group-id artifact-id namespace)
   (format "mvn io.quarkus.platform:quarkus-maven-plugin:%1$s:create \
