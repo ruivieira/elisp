@@ -13,7 +13,7 @@
 
 
 ;;; Code:
-(provide 'trustyai)
+(provide 'robby)
 
 (defun robby-notes-move ()
   "Move the Obsidian notes"
